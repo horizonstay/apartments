@@ -156,6 +156,8 @@
         }
 
         function closeModal() {
+            // --- FIX: Reset Scroll Position ---
+            modalThumbs.scrollLeft = 0;
             if (modalOverlay) modalOverlay.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
