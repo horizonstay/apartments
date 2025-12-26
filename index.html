@@ -1,241 +1,227 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Stay | Luxury Apartments</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Horizon Stay | Luxury Apartments&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="styles.css"&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://imagizer.imageshack.com/img921/7282/rCJAhK.png" alt="Horizon Stay" class="logo-img"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="section-title"&gt;&lt;span&gt;Apartments&lt;/span&gt;&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="section-desc"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>Discover exceptional Dubai apartments where modern design meets prime locations and effortless living.</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="apartment-grid" id="grid-container"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="modal-overlay" id="modal-overlay"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="modal-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="close-modal" onclick="closeModal()"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="modal-body"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="modal-gallery"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="main-image-container skeleton-anim" id="main-img-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="gallery-nav prev-btn" id="btn-prev" onclick="changeImage(-1)"&gt;&amp;#10094;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="" alt="Main View" class="modal-main-img" id="modal-main-img"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="gallery-nav next-btn" id="btn-next" onclick="changeImage(1)"&gt;&amp;#10095;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="thumbnails-row" id="modal-thumbnails"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="modal-info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="modal-title gradient-text" id="modal-title"&gt;Apartment Title&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="modal-desc" id="modal-desc"&gt;Description goes here...&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                    </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="modal-actions"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#" target="_blank" rel="noopener noreferrer" class="action-btn btn-whatsapp" id="link-whatsapp"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;Chat on WhatsApp&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#" target="_blank" rel="noopener noreferrer" class="action-btn btn-airbnb" id="link-airbnb"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;img src="https://img.icons8.com/ios-filled/50/ffffff/airbnb.png" alt="Airbnb"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;Book on Airbnb&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#" target="_blank" rel="noopener noreferrer" class="action-btn btn-booking" id="link-booking"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;img src="https://img.icons8.com/ios-filled/50/ffffff/booking.png" alt="Booking.com"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;Book on Booking.com&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="footer-text"&gt;&amp;copy; 2025 Horizon Stay. All rights reserved.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="apartments.js"&gt;&lt;/script&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- GLOBAL CONFIGURATION ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Change this number to your unified WhatsApp number (International format without +)</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const GLOBAL_WHATSAPP_NUMBER = "971554171152";<span class="Apple-converted-space"> </span></p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- RENDER GRID ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const gridContainer = document.getElementById('grid-container');</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const renderApartments = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let htmlContent = '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>apartments.forEach(apt =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>htmlContent += `</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;article class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="img-wrapper skeleton-anim"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;img src="${apt.image}" alt="${apt.title}" class="card-image" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton-anim')"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h2 class="apt-title gradient-text"&gt;${apt.title}&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="apt-details"&gt;${apt.details}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="btn-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button class="btn-explore" onclick="openModal(${apt.id})"&gt;Explore&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gridContainer.innerHTML = htmlContent;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p1"><span class="Apple-converted-space">        </span>renderApartments();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- MODAL &amp; LOGIC ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const modalOverlay = document.getElementById('modal-overlay');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const modalTitle = document.getElementById('modal-title');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const modalDesc = document.getElementById('modal-desc');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const modalMainImg = document.getElementById('modal-main-img');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const mainImgContainer = document.getElementById('main-img-container');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const modalThumbs = document.getElementById('modal-thumbnails');</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Buttons hooks</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const linkAirbnb = document.getElementById('link-airbnb');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const linkBooking = document.getElementById('link-booking');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const linkWhatsapp = document.getElementById('link-whatsapp');</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const btnPrev = document.getElementById('btn-prev');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const btnNext = document.getElementById('btn-next');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>let currentGallery = [];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let currentImgIndex = 0;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function openModal(id) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!modalOverlay) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const apt = apartments.find(a =&gt; a.id === id);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!apt) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalTitle.textContent = apt.title;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalDesc.textContent = apt.description;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Set Hrefs for booking links (Standard HTML)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (linkAirbnb) linkAirbnb.href = apt.links.airbnb;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (linkBooking) linkBooking.href = apt.links.booking;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Set WhatsApp Link using Global Number</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (linkWhatsapp) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const waMsg = encodeURIComponent(`I am interested in ${apt.title}`);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>linkWhatsapp.href = `https://wa.me/${GLOBAL_WHATSAPP_NUMBER}?text=${waMsg}`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Create Thumbnails Once</p>
-<p class="p1"><span class="Apple-converted-space">            </span>currentGallery = apt.gallery &amp;&amp; apt.gallery.length &gt; 0 ? apt.gallery : [apt.image];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>currentImgIndex = 0;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>let thumbsHtml = '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>currentGallery.forEach((img, index) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>thumbsHtml += `&lt;img src="${img}" loading="lazy" class="thumb" onclick="setMainImage(${index})"&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalThumbs.innerHTML = thumbsHtml;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>updateGalleryDisplay();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalOverlay.classList.add('active');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.body.style.overflow = 'hidden';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function closeModal() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (modalOverlay) modalOverlay.classList.remove('active');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.body.style.overflow = 'auto';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (modalOverlay) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalOverlay.addEventListener('click', (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (e.target === modalOverlay) closeModal();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function updateGalleryDisplay() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Set loading state</p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalMainImg.classList.remove('visible');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mainImgContainer.classList.add('skeleton-anim');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Change source</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const newSrc = currentGallery[currentImgIndex];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalMainImg.src = newSrc;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Handle Load Event for main image</p>
-<p class="p1"><span class="Apple-converted-space">            </span>modalMainImg.onload = function() {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>modalMainImg.classList.add('visible');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>mainImgContainer.classList.remove('skeleton-anim');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Smart Preload</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (currentGallery.length &gt; 1) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const nextIndex = (currentImgIndex + 1) % currentGallery.length;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const prevIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>new Image().src = currentGallery[nextIndex];</p>
-<p class="p1"><span class="Apple-converted-space">                </span>new Image().src = currentGallery[prevIndex];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Update Thumbnails</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const thumbs = modalThumbs.children;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; thumbs.length; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>thumbs[i].classList.remove('active');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (thumbs[currentImgIndex]) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>thumbs[currentImgIndex].classList.add('active');</p>
-<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>thumbs[currentImgIndex].scrollIntoView({</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>behavior: 'smooth',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>block: 'nearest',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>inline: 'center'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>} catch (e) {}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Nav Buttons</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const total = currentGallery.length;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (btnPrev) btnPrev.style.display = (total &gt; 1 &amp;&amp; currentImgIndex &gt; 0) ? 'block' : 'none';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (btnNext) btnNext.style.display = (total &gt; 1 &amp;&amp; currentImgIndex &lt; total - 1) ? 'block' : 'none';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function changeImage(direction) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>currentImgIndex += direction;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (currentImgIndex &gt;= currentGallery.length) currentImgIndex = currentGallery.length - 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (currentImgIndex &lt; 0) currentImgIndex = 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>updateGalleryDisplay();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function setMainImage(index) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>currentImgIndex = index;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>updateGalleryDisplay();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+    <header>
+        <img src="https://imagizer.imageshack.com/img921/7282/rCJAhK.png" alt="Horizon Stay" class="logo-img">
+    </header>
+
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title"><span>Apartments</span></h1>
+            <p class="section-desc">
+                Discover exceptional Dubai apartments where modern design meets prime locations and effortless living.
+            </p>
+        </div>
+        <div class="apartment-grid" id="grid-container"></div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <div class="close-modal" onclick="closeModal()">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="main-image-container skeleton-anim" id="main-img-container">
+                        <button class="gallery-nav prev-btn" id="btn-prev" onclick="changeImage(-1)">&#10094;</button>
+                        <img src="" alt="Main View" class="modal-main-img" id="modal-main-img">
+                        <button class="gallery-nav next-btn" id="btn-next" onclick="changeImage(1)">&#10095;</button>
+                    </div>
+                    <div class="thumbnails-row" id="modal-thumbnails"></div>
+                </div>
+                
+                <div class="modal-info">
+                    <h2 class="modal-title gradient-text" id="modal-title">Apartment Title</h2>
+                    <p class="modal-desc" id="modal-desc">Description goes here...</p>
+                    
+                    <div class="modal-actions">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="action-btn btn-whatsapp" id="link-whatsapp">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp">
+                            <span>Chat on WhatsApp</span>
+                        </a>
+
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="action-btn btn-airbnb" id="link-airbnb">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/airbnb.png" alt="Airbnb">
+                            <span>Book on Airbnb</span>
+                        </a>
+
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="action-btn btn-booking" id="link-booking">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/booking.png" alt="Booking.com">
+                            <span>Book on Booking.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-text">&copy; 2025 Horizon Stay. All rights reserved.</p>
+    </footer>
+    
+    <script src="apartments.js"></script>
+    
+    <script>
+        // --- GLOBAL CONFIGURATION ---
+        // Change this number to your unified WhatsApp number (International format without +)
+        const GLOBAL_WHATSAPP_NUMBER = "971554171152"; 
+
+
+
+        // --- RENDER GRID ---
+        const gridContainer = document.getElementById('grid-container');
+        
+        const renderApartments = () => {
+            let htmlContent = '';
+            apartments.forEach(apt => {
+                htmlContent += `
+                    <article class="card">
+                        <div class="img-wrapper skeleton-anim">
+                            <img src="${apt.image}" alt="${apt.title}" class="card-image" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton-anim')">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="apt-title gradient-text">${apt.title}</h2>
+                            <p class="apt-details">${apt.details}</p>
+                            <div class="btn-container">
+                                <button class="btn-explore" onclick="openModal(${apt.id})">Explore</button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            });
+            gridContainer.innerHTML = htmlContent;
+        };
+        renderApartments();
+
+        // --- MODAL & LOGIC ---
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalMainImg = document.getElementById('modal-main-img');
+        const mainImgContainer = document.getElementById('main-img-container');
+        const modalThumbs = document.getElementById('modal-thumbnails');
+        
+        // Buttons hooks
+        const linkAirbnb = document.getElementById('link-airbnb');
+        const linkBooking = document.getElementById('link-booking');
+        const linkWhatsapp = document.getElementById('link-whatsapp');
+        
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
+        let currentGallery = [];
+        let currentImgIndex = 0;
+
+        function openModal(id) {
+            if (!modalOverlay) return;
+
+            const apt = apartments.find(a => a.id === id);
+            if (!apt) return;
+
+            modalTitle.textContent = apt.title;
+            modalDesc.textContent = apt.description;
+            
+            // Set Hrefs for booking links (Standard HTML)
+            if (linkAirbnb) linkAirbnb.href = apt.links.airbnb;
+            if (linkBooking) linkBooking.href = apt.links.booking;
+            
+            // Set WhatsApp Link using Global Number
+            if (linkWhatsapp) {
+                const waMsg = encodeURIComponent(`I am interested in ${apt.title}`);
+                linkWhatsapp.href = `https://wa.me/${GLOBAL_WHATSAPP_NUMBER}?text=${waMsg}`;
+            }
+
+            // Create Thumbnails Once
+            currentGallery = apt.gallery && apt.gallery.length > 0 ? apt.gallery : [apt.image];
+            currentImgIndex = 0;
+            
+            let thumbsHtml = '';
+            currentGallery.forEach((img, index) => {
+                thumbsHtml += `<img src="${img}" loading="lazy" class="thumb" onclick="setMainImage(${index})">`;
+            });
+            modalThumbs.innerHTML = thumbsHtml;
+
+            updateGalleryDisplay();
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            if (modalOverlay) modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+        }
+
+        function updateGalleryDisplay() {
+            // Set loading state
+            modalMainImg.classList.remove('visible');
+            mainImgContainer.classList.add('skeleton-anim');
+
+            // Change source
+            const newSrc = currentGallery[currentImgIndex];
+            modalMainImg.src = newSrc;
+
+            // Handle Load Event for main image
+            modalMainImg.onload = function() {
+                modalMainImg.classList.add('visible');
+                mainImgContainer.classList.remove('skeleton-anim');
+            };
+
+            // Smart Preload
+            if (currentGallery.length > 1) {
+                const nextIndex = (currentImgIndex + 1) % currentGallery.length;
+                const prevIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;
+                new Image().src = currentGallery[nextIndex];
+                new Image().src = currentGallery[prevIndex];
+            }
+            
+            // Update Thumbnails
+            const thumbs = modalThumbs.children;
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].classList.remove('active');
+            }
+            if (thumbs[currentImgIndex]) {
+                thumbs[currentImgIndex].classList.add('active');
+                try {
+                    thumbs[currentImgIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                } catch (e) {}
+            }
+
+            // Nav Buttons
+            const total = currentGallery.length;
+            if (btnPrev) btnPrev.style.display = (total > 1 && currentImgIndex > 0) ? 'block' : 'none';
+            if (btnNext) btnNext.style.display = (total > 1 && currentImgIndex < total - 1) ? 'block' : 'none';
+        }
+
+        function changeImage(direction) {
+            currentImgIndex += direction;
+            if (currentImgIndex >= currentGallery.length) currentImgIndex = currentGallery.length - 1;
+            if (currentImgIndex < 0) currentImgIndex = 0;
+            updateGalleryDisplay();
+        }
+
+        function setMainImage(index) {
+            currentImgIndex = index;
+            updateGalleryDisplay();
+        }
+    </script>
 </body>
 </html>
