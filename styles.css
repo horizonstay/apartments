@@ -185,7 +185,7 @@ footer {
 
 .modal-content {
     background-color: var(--bg-color); width: 90%; max-width: 1000px;
-    height: 90vh; /* Fixed height for stability */
+    height: 90vh; 
     border-radius: 20px; 
     position: relative; display: flex; flex-direction: column;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -244,47 +244,28 @@ footer {
 
 .modal-main-img.visible { opacity: 1; }
 
-/* --- NAV ARROWS (FIXED FOR TOUCH & ZOOM) --- */
+/* --- NAV ARROWS --- */
 .gallery-nav {
     position: absolute; top: 50%; transform: translateY(-50%);
-    
-    /* Default Style */
     background: rgba(0,0,0,0.5); 
     color: white; border: none;
     padding: 10px 15px; cursor: pointer; font-size: 1.5rem;
     transition: background 0.1s ease;
     z-index: 5; display: none;
-    
-    /* FIX: Prevents Double-Tap to Zoom on Mobile */
     touch-action: manipulation;
-    
-    /* Mobile Visual Fixes */
     -webkit-tap-highlight-color: transparent;
     outline: none; 
     user-select: none;
 }
 
-/* 1. RESET: Force generic hover to do nothing (Fixes sticky mobile) */
-.gallery-nav:hover {
-    background: rgba(0,0,0,0.5); 
-}
+.gallery-nav:hover { background: rgba(0,0,0,0.5); }
 
-/* 2. DESKTOP ONLY: Re-enable hover ONLY if device has a fine pointer (Mouse) */
 @media (hover: hover) and (pointer: fine) {
-    .gallery-nav:hover { 
-        background: rgba(237, 66, 100, 0.8); 
-    }
+    .gallery-nav:hover { background: rgba(237, 66, 100, 0.8); }
 }
 
-/* 3. CLICK/TAP: Ensure visual feedback when actually pressing */
-.gallery-nav:active {
-    background: rgba(237, 66, 100, 0.8) !important;
-}
-
-/* 4. FOCUS: Prevent the button from staying highlighted after click */
-.gallery-nav:focus {
-    background: rgba(0,0,0,0.5);
-}
+.gallery-nav:active { background: rgba(237, 66, 100, 0.8) !important; }
+.gallery-nav:focus { background: rgba(0,0,0,0.5); }
 
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
@@ -326,11 +307,51 @@ footer {
 .btn-airbnb { background-color: var(--airbnb-color); }
 .btn-booking { background-color: var(--booking-color); }
 
-@media (max-width: 600px) {
+/* --- MOBILE PORTRAIT & LANDSCAPE FIX --- */
+/* Applies to both standard mobile portrait and small landscape devices */
+@media (max-width: 600px), (max-height: 500px) and (orientation: landscape) {
     .section-header { padding-left: 15px; margin-bottom: 30px; }
     .section-title { font-size: 2rem; }
-    .modal-content { height: 100%; max-height: 100%; width: 100%; border-radius: 0; }
-    .modal-body { border-radius: 0; height: 100%; }
-    .main-image-container { height: 250px; }
-    .modal-gallery { flex: 0 0 auto; min-height: auto; }
+
+    /* Make modal behave like a full webpage */
+    .modal-content {
+        height: 100% !important;
+        max-height: 100% !important;
+        width: 100% !important;
+        border-radius: 0;
+        display: block !important; /* Stack vertically */
+        overflow-y: auto !important; /* Enable global scroll */
+    }
+
+    .modal-body {
+        height: auto !important;
+        border-radius: 0;
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    .modal-gallery {
+        flex: none !important;
+        height: auto !important;
+    }
+
+    .main-image-container {
+        /* Fixed height for image, but user can scroll past it */
+        height: 300px !important;
+    }
+
+    .modal-info {
+        height: auto !important;
+        overflow: visible !important; /* Text grows naturally */
+        flex: none !important;
+        padding-bottom: 60px; /* Space for buttons */
+    }
+
+    /* Fix Close Button so it stays on screen while scrolling */
+    .close-modal {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 100; /* Ensure it's above everything */
+    }
 }
