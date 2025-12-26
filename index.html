@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizon Stay | Luxury Apartments</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
 
@@ -31,9 +31,9 @@
             <div class="modal-body">
                 <div class="modal-gallery">
                     <div class="main-image-container skeleton-anim" id="main-img-container">
-                        <button class="gallery-nav prev-btn" id="btn-prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="gallery-nav prev-btn" id="btn-prev">&#10094;</button>
                         <img src="" alt="Main View" class="modal-main-img" id="modal-main-img">
-                        <button class="gallery-nav next-btn" id="btn-next" onclick="changeImage(1)">&#10095;</button>
+                        <button class="gallery-nav next-btn" id="btn-next">&#10095;</button>
                     </div>
                     <div class="thumbnails-row" id="modal-thumbnails"></div>
                 </div>
@@ -66,20 +66,22 @@
     <footer>
         <p class="footer-text">&copy; 2025 Horizon Stay. All rights reserved.</p>
     </footer>
-    
+
     <script src="apartments.js"></script>
-    
+
     <script>
         // --- GLOBAL CONFIGURATION ---
-        // Change this number to your unified WhatsApp number (International format without +)
         const GLOBAL_WHATSAPP_NUMBER = "971554171152"; 
-
-
 
         // --- RENDER GRID ---
         const gridContainer = document.getElementById('grid-container');
         
         const renderApartments = () => {
+            if (typeof apartments === 'undefined') {
+                console.error("Apartments data not loaded. Check apartments.js path.");
+                return;
+            }
+
             let htmlContent = '';
             apartments.forEach(apt => {
                 htmlContent += `
@@ -99,7 +101,8 @@
             });
             gridContainer.innerHTML = htmlContent;
         };
-        renderApartments();
+        
+        document.addEventListener('DOMContentLoaded', renderApartments);
 
         // --- MODAL & LOGIC ---
         const modalOverlay = document.getElementById('modal-overlay');
@@ -109,13 +112,36 @@
         const mainImgContainer = document.getElementById('main-img-container');
         const modalThumbs = document.getElementById('modal-thumbnails');
         
-        // Buttons hooks
         const linkAirbnb = document.getElementById('link-airbnb');
         const linkBooking = document.getElementById('link-booking');
         const linkWhatsapp = document.getElementById('link-whatsapp');
         
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
+
+        // --- FAST TAP LOGIC (Fixes Zoom Issue) ---
+        // This function attaches a listener that fires instantly on touch, ignoring zoom gestures
+        function attachFastClick(element, callback) {
+            if (!element) return;
+
+            // 1. Handle Touch (Mobile)
+            // passive: false allows us to use preventDefault() to stop the zoom
+            element.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Stop browser from waiting for double-tap zoom
+                callback();
+            }, { passive: false });
+
+            // 2. Handle Mouse (Desktop)
+            element.addEventListener('click', (e) => {
+                e.preventDefault();
+                callback();
+            });
+        }
+
+        // Attach listeners to buttons
+        attachFastClick(btnPrev, () => changeImage(-1));
+        attachFastClick(btnNext, () => changeImage(1));
+
 
         let currentGallery = [];
         let currentImgIndex = 0;
@@ -129,17 +155,14 @@
             modalTitle.textContent = apt.title;
             modalDesc.textContent = apt.description;
             
-            // Set Hrefs for booking links (Standard HTML)
             if (linkAirbnb) linkAirbnb.href = apt.links.airbnb;
             if (linkBooking) linkBooking.href = apt.links.booking;
             
-            // Set WhatsApp Link using Global Number
             if (linkWhatsapp) {
                 const waMsg = encodeURIComponent(`I am interested in ${apt.title}`);
                 linkWhatsapp.href = `https://wa.me/${GLOBAL_WHATSAPP_NUMBER}?text=${waMsg}`;
             }
 
-            // Create Thumbnails Once
             currentGallery = apt.gallery && apt.gallery.length > 0 ? apt.gallery : [apt.image];
             currentImgIndex = 0;
             
@@ -148,6 +171,9 @@
                 thumbsHtml += `<img src="${img}" loading="lazy" class="thumb" onclick="setMainImage(${index})">`;
             });
             modalThumbs.innerHTML = thumbsHtml;
+
+            // Instant Scroll Reset
+            modalThumbs.scrollLeft = 0; 
 
             updateGalleryDisplay();
 
@@ -177,13 +203,11 @@
             const newSrc = currentGallery[currentImgIndex];
             modalMainImg.src = newSrc;
 
-            // Handle Load Event for main image
             modalMainImg.onload = function() {
                 modalMainImg.classList.add('visible');
                 mainImgContainer.classList.remove('skeleton-anim');
             };
 
-            // Smart Preload
             if (currentGallery.length > 1) {
                 const nextIndex = (currentImgIndex + 1) % currentGallery.length;
                 const prevIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;
@@ -191,7 +215,6 @@
                 new Image().src = currentGallery[prevIndex];
             }
             
-            // Update Thumbnails
             const thumbs = modalThumbs.children;
             for (let i = 0; i < thumbs.length; i++) {
                 thumbs[i].classList.remove('active');
@@ -207,7 +230,6 @@
                 } catch (e) {}
             }
 
-            // Nav Buttons
             const total = currentGallery.length;
             if (btnPrev) btnPrev.style.display = (total > 1 && currentImgIndex > 0) ? 'block' : 'none';
             if (btnNext) btnNext.style.display = (total > 1 && currentImgIndex < total - 1) ? 'block' : 'none';
