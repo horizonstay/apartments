@@ -119,29 +119,21 @@
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
 
-        // --- FAST TAP LOGIC (Fixes Zoom Issue) ---
-        // This function attaches a listener that fires instantly on touch, ignoring zoom gestures
+        // --- FAST TAP LOGIC ---
         function attachFastClick(element, callback) {
             if (!element) return;
-
-            // 1. Handle Touch (Mobile)
-            // passive: false allows us to use preventDefault() to stop the zoom
             element.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // Stop browser from waiting for double-tap zoom
+                if (e.cancelable) e.preventDefault();
                 callback();
             }, { passive: false });
-
-            // 2. Handle Mouse (Desktop)
             element.addEventListener('click', (e) => {
                 e.preventDefault();
                 callback();
             });
         }
 
-        // Attach listeners to buttons
         attachFastClick(btnPrev, () => changeImage(-1));
         attachFastClick(btnNext, () => changeImage(1));
-
 
         let currentGallery = [];
         let currentImgIndex = 0;
@@ -168,11 +160,12 @@
             
             let thumbsHtml = '';
             currentGallery.forEach((img, index) => {
-                thumbsHtml += `<img src="${img}" loading="lazy" class="thumb" onclick="setMainImage(${index})">`;
+                // REMOVED 'loading="lazy"' from thumbnails to prevent loading glitches in modal
+                // Added 'onerror' to hide broken thumbnails
+                thumbsHtml += `<img src="${img}" class="thumb" onclick="setMainImage(${index})" onerror="this.style.display='none'">`;
             });
             modalThumbs.innerHTML = thumbsHtml;
 
-            // Instant Scroll Reset
             modalThumbs.scrollLeft = 0; 
 
             updateGalleryDisplay();
@@ -182,7 +175,6 @@
         }
 
         function closeModal() {
-            // --- FIX: Reset Scroll Position ---
             modalThumbs.scrollLeft = 0;
             if (modalOverlay) modalOverlay.classList.remove('active');
             document.body.style.overflow = 'auto';
@@ -195,19 +187,29 @@
         }
 
         function updateGalleryDisplay() {
-            // Set loading state
+            // 1. Reset state
             modalMainImg.classList.remove('visible');
             mainImgContainer.classList.add('skeleton-anim');
 
-            // Change source
             const newSrc = currentGallery[currentImgIndex];
-            modalMainImg.src = newSrc;
 
+            // 2. DEFINE LISTENERS BEFORE SETTING SRC (Fixes the "invisible image" bug)
             modalMainImg.onload = function() {
                 modalMainImg.classList.add('visible');
                 mainImgContainer.classList.remove('skeleton-anim');
             };
 
+            // 3. Handle Broken Images
+            modalMainImg.onerror = function() {
+                mainImgContainer.classList.remove('skeleton-anim');
+                // You could set a placeholder here if you want:
+                // modalMainImg.src = 'path/to/placeholder.jpg'; 
+            };
+
+            // 4. Set Src (Triggers load)
+            modalMainImg.src = newSrc;
+
+            // Preload next/prev
             if (currentGallery.length > 1) {
                 const nextIndex = (currentImgIndex + 1) % currentGallery.length;
                 const prevIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;
@@ -215,11 +217,13 @@
                 new Image().src = currentGallery[prevIndex];
             }
             
+            // Thumbnails
             const thumbs = modalThumbs.children;
             for (let i = 0; i < thumbs.length; i++) {
                 thumbs[i].classList.remove('active');
             }
-            if (thumbs[currentImgIndex]) {
+            // Check if thumbnail exists (it might be hidden by onerror)
+            if (thumbs[currentImgIndex] && thumbs[currentImgIndex].style.display !== 'none') {
                 thumbs[currentImgIndex].classList.add('active');
                 try {
                     thumbs[currentImgIndex].scrollIntoView({
