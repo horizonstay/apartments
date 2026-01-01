@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="images/horioznStayicon.png" href="favicon.ico">
-    <title>Horizon Stay | Elevating Every Moment</title>
+    <title>Horizon Stay | Luxury Apartments</title>
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
@@ -58,8 +57,42 @@
                             <img src="images/bookingIcon.png" alt="Booking.com">
                             <span>Show on Booking.com</span>
                         </a>
+
+                        <button class="action-btn btn-share" id="btn-share">
+                            <img src="images/shareIcon.png" alt="Share">
+                            <span>Share this Apartment</span>
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="share-overlay" id="share-overlay">
+        <div class="share-box">
+            <div class="share-header">
+                <h3>Share this Apartment</h3>
+                <button class="close-share" id="close-share-btn">&times;</button>
+            </div>
+            
+            <div class="share-input-group">
+                <input type="text" id="share-url-input" readonly>
+                <button id="btn-copy-link">Copy</button>
+            </div>
+
+            <div class="share-socials">
+                <a href="#" target="_blank" id="share-fb" class="social-btn fb">
+                    <img src="images/facebookFilledIcom.png" alt="FB">
+                    <span>Facebook</span>
+                </a>
+                <a href="#" target="_blank" id="share-wa" class="social-btn wa">
+                    <img src="images/whatsappFilledIcon.png" alt="WA">
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#" target="_blank" id="share-email" class="social-btn email">
+                    <img src="images/emailFilledIcon.png" alt="Email">
+                    <span>Email</span>
+                </a>
             </div>
         </div>
     </div>
@@ -69,188 +102,5 @@
     </footer>
 
     <script src="apartments.js"></script>
-
-    <script>
-        // --- GLOBAL CONFIGURATION ---
-        const GLOBAL_WHATSAPP_NUMBER = "971554171152"; 
-
-        // --- RENDER GRID ---
-        const gridContainer = document.getElementById('grid-container');
-        
-        const renderApartments = () => {
-            if (typeof apartments === 'undefined') {
-                console.error("Apartments data not loaded. Check apartments.js path.");
-                return;
-            }
-
-            let htmlContent = '';
-            apartments.forEach(apt => {
-                htmlContent += `
-                    <article class="card">
-                        <div class="img-wrapper skeleton-anim">
-                            <img src="${apt.image}" alt="${apt.title}" class="card-image" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton-anim')">
-                        </div>
-                        <div class="card-content">
-                            <h2 class="apt-title gradient-text">${apt.title}</h2>
-                            <p class="apt-details">${apt.details}</p>
-                            <div class="btn-container">
-                                <button class="btn-explore" onclick="openModal(${apt.id})">Explore</button>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            });
-            gridContainer.innerHTML = htmlContent;
-        };
-        
-        document.addEventListener('DOMContentLoaded', renderApartments);
-
-        // --- MODAL & LOGIC ---
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDesc = document.getElementById('modal-desc');
-        const modalMainImg = document.getElementById('modal-main-img');
-        const mainImgContainer = document.getElementById('main-img-container');
-        const modalThumbs = document.getElementById('modal-thumbnails');
-        
-        const linkAirbnb = document.getElementById('link-airbnb');
-        const linkBooking = document.getElementById('link-booking');
-        const linkWhatsapp = document.getElementById('link-whatsapp');
-        
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-
-        // --- FAST TAP LOGIC ---
-        function attachFastClick(element, callback) {
-            if (!element) return;
-            element.addEventListener('touchstart', (e) => {
-                if (e.cancelable) e.preventDefault();
-                callback();
-            }, { passive: false });
-            element.addEventListener('click', (e) => {
-                e.preventDefault();
-                callback();
-            });
-        }
-
-        attachFastClick(btnPrev, () => changeImage(-1));
-        attachFastClick(btnNext, () => changeImage(1));
-
-        let currentGallery = [];
-        let currentImgIndex = 0;
-
-        function openModal(id) {
-            if (!modalOverlay) return;
-
-            const apt = apartments.find(a => a.id === id);
-            if (!apt) return;
-
-            modalTitle.textContent = apt.title;
-            modalDesc.textContent = apt.description;
-            
-            if (linkAirbnb) linkAirbnb.href = apt.links.airbnb;
-            if (linkBooking) linkBooking.href = apt.links.booking;
-            
-            if (linkWhatsapp) {
-                const waMsg = encodeURIComponent(`I am interested in ${apt.title}`);
-                linkWhatsapp.href = `https://wa.me/${GLOBAL_WHATSAPP_NUMBER}?text=${waMsg}`;
-            }
-
-            currentGallery = apt.gallery && apt.gallery.length > 0 ? apt.gallery : [apt.image];
-            currentImgIndex = 0;
-            
-            let thumbsHtml = '';
-            currentGallery.forEach((img, index) => {
-                // REMOVED 'loading="lazy"' from thumbnails to prevent loading glitches in modal
-                // Added 'onerror' to hide broken thumbnails
-                thumbsHtml += `<img src="${img}" class="thumb" onclick="setMainImage(${index})" onerror="this.style.display='none'">`;
-            });
-            modalThumbs.innerHTML = thumbsHtml;
-
-            modalThumbs.scrollLeft = 0; 
-
-            updateGalleryDisplay();
-
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modalThumbs.scrollLeft = 0;
-            if (modalOverlay) modalOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        if (modalOverlay) {
-            modalOverlay.addEventListener('click', (e) => {
-                if (e.target === modalOverlay) closeModal();
-            });
-        }
-
-        function updateGalleryDisplay() {
-            // 1. Reset state
-            modalMainImg.classList.remove('visible');
-            mainImgContainer.classList.add('skeleton-anim');
-
-            const newSrc = currentGallery[currentImgIndex];
-
-            // 2. DEFINE LISTENERS BEFORE SETTING SRC (Fixes the "invisible image" bug)
-            modalMainImg.onload = function() {
-                modalMainImg.classList.add('visible');
-                mainImgContainer.classList.remove('skeleton-anim');
-            };
-
-            // 3. Handle Broken Images
-            modalMainImg.onerror = function() {
-                mainImgContainer.classList.remove('skeleton-anim');
-                // You could set a placeholder here if you want:
-                // modalMainImg.src = 'path/to/placeholder.jpg'; 
-            };
-
-            // 4. Set Src (Triggers load)
-            modalMainImg.src = newSrc;
-
-            // Preload next/prev
-            if (currentGallery.length > 1) {
-                const nextIndex = (currentImgIndex + 1) % currentGallery.length;
-                const prevIndex = (currentImgIndex - 1 + currentGallery.length) % currentGallery.length;
-                new Image().src = currentGallery[nextIndex];
-                new Image().src = currentGallery[prevIndex];
-            }
-            
-            // Thumbnails
-            const thumbs = modalThumbs.children;
-            for (let i = 0; i < thumbs.length; i++) {
-                thumbs[i].classList.remove('active');
-            }
-            // Check if thumbnail exists (it might be hidden by onerror)
-            if (thumbs[currentImgIndex] && thumbs[currentImgIndex].style.display !== 'none') {
-                thumbs[currentImgIndex].classList.add('active');
-                try {
-                    thumbs[currentImgIndex].scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'center'
-                    });
-                } catch (e) {}
-            }
-
-            const total = currentGallery.length;
-            if (btnPrev) btnPrev.style.display = (total > 1 && currentImgIndex > 0) ? 'block' : 'none';
-            if (btnNext) btnNext.style.display = (total > 1 && currentImgIndex < total - 1) ? 'block' : 'none';
-        }
-
-        function changeImage(direction) {
-            currentImgIndex += direction;
-            if (currentImgIndex >= currentGallery.length) currentImgIndex = currentGallery.length - 1;
-            if (currentImgIndex < 0) currentImgIndex = 0;
-            updateGalleryDisplay();
-        }
-
-        function setMainImage(index) {
-            currentImgIndex = index;
-            updateGalleryDisplay();
-        }
-    </script>
 </body>
 </html>
