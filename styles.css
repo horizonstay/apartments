@@ -477,7 +477,7 @@ footer {
 /* --- NAVIGATION LINKS (Underline Style) --- */
 .main-nav {
     display: flex;
-    gap: 30px; /* Space between words */
+    gap: 20px; /* Space between words */
 }
 
 .nav-link {
